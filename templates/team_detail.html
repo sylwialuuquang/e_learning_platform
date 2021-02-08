@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Class {{ team }}</h1>
+<h4>Supervisor: {{ team.supervisor }}</h4>
+<div>
+    Courses:
+    <ul>
+        {% for course in courses %}
+        <li><a href="{% url 'course_detail' course.id %}">{{ course.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'course_create' %}">
+        <input type="submit" value="Create Course">
+    </form>
+</div>
+<div>
+    Members:
+    <ul>
+        {% for member in members %}
+        <li>{{ member }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    Posts:
+    <ul>
+        {% for post in posts %}
+            <li>{{ post.course }}
+            {{ post.author }}
+            {{ post.published }}
+            {{ post.content }}
+                {% for post_attachment in post.post_attachments.all %}
+                <a href="{{ MEDIA_URL}}{{ post_attachment.attachment.file }}">{{ post_attachment.attachment }}</a>
+                {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div class="Table">
+    <table border="1">
+        <tbody>
+        {% for row in schedule %}
+        <tr>
+            {% for col in row %}
+            <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

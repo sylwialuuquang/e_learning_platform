@@ -1,0 +1,7 @@
+db.sqlite3
+fixtures.json
+**/__pycache__/*
+*/migrations/*
+media/files/*
+media/avatar/*
+!media/avatar/default.png

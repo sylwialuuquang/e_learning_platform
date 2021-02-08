@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ course }}</h1>
+<h4>Teacher: {{ course.teacher }}</h4>
+<div>
+    Lessons:
+    <ul>
+        {% for lesson in lessons %}
+        <li><a href="{% url 'lesson_detail' course.id lesson.id %}">{{ lesson.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <form action="{% url 'lesson_create' course.id %}">
+        <input type="submit" value="Create Lesson">
+    </form>
+</div>
+<div>
+    Posts:
+    <ul>
+        {% for post in posts %}
+            <li>
+                {{ post.course }}
+                {{ post.author }}
+                {{ post.published }}
+                {{ post.content }}
+                    {% for post_attachment in post.post_attachments.all %}
+                    <a href="{{ MEDIA_URL}}{{ post_attachment.attachment.file }}">{{ post_attachment.attachment }}</a>
+                    {% endfor %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    Tests:
+    <ul>
+        {% for test in tests %}
+        <li>
+            <a href="{% url 'test_detail' test.id %}">{{ test.title }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+    <form action="{% url 'course_update' course.id %}">
+        <input type="submit" value="Update Course">
+    </form>
+    <form action="{% url 'course_delete' course.id %}">
+        <input type="submit" value="Delete Course">
+    </form>
+<div>
+    Scheduled:
+    <ul>
+        {% for date in schedule %}
+        <li>
+            {{ date.day }}: {{ date.timeslot.slot_no }}. {{ date.timeslot.time }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+    <form action="{% url 'schedule_create' course.id %}">
+        <input type="submit" value="Add to Schedule">
+    </form>
+{% endblock %}

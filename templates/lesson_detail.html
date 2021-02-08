@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ lesson.course }}</h1>
+<h4>{{ lesson }}</h4>
+<div>
+    Description:
+    {{ lesson.description }}
+</div>
+<div>
+    Attachments:
+    <ul>
+    {% for attachment in attachments %}
+        <li><a href="{{ MEDIA_URL}}{{ attachment.file }}">{{ attachment.name }}</a></li>
+    {% endfor%}
+    </ul>
+</div>
+<form action="{% url 'lesson_update' lesson.course.id lesson.id %}">
+    <input type="submit" value="Update Lesson">
+</form>
+<form action="{% url 'lesson_delete' lesson.course.id lesson.id %}">
+    <input type="submit" value="Delete Lesson">
+</form>
+{% endblock %}
