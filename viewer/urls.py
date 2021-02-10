@@ -1,12 +1,12 @@
 from django.urls import path
-from .views import TeamDetailView, CourseDetailView, CurseCreateView, CourseUpdateView, CourseDeleteView, \
+from .views import TeamDetailView, CourseDetailView, CourseCreateView, CourseUpdateView, CourseDeleteView, \
     LessonDetailView, LessonCreateView, LessonUpdateView, LessonDeleteView, ScheduleCreateView
 
 
 urlpatterns = [
     path('team/<int:pk>/', TeamDetailView.as_view(), name='team_detail'),
     path('course/<int:pk>/', CourseDetailView.as_view(), name='course_detail'),
-    path('course/create', CurseCreateView.as_view(), name='course_create'),
+    path('course/create', CourseCreateView.as_view(), name='course_create'),
     path('course/<int:pk>/update', CourseUpdateView.as_view(), name='course_update'),
     path('course/<int:pk>/delete', CourseDeleteView.as_view(), name='course_delete'),
     path('course/<int:course_pk>/lesson/<int:pk>/', LessonDetailView.as_view(), name='lesson_detail'),

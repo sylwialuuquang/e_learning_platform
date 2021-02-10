@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
 from .models import Team, Course, Lesson, Post, Attachment, Schedule, TimeSlot
-from .forms import CourseForm, LessonForm, ScheduleForm
+from .forms import CourseForm, LessonForm, ScheduleForm, AttachmentForm
 from testsheets.models import Test
 from accounts.models import Profile
 
@@ -51,9 +51,14 @@ class CourseDetailView(DetailView):
         return context
 
 
-class CurseCreateView(CreateView):
+class CourseCreateView(CreateView):
     form_class = CourseForm
     template_name = 'form.html'
+
+    # def get_form_kwargs(self, *args, **kwargs):
+    #     kwargs = super(CourseCreateView, self).get_form_kwargs(*args, **kwargs)
+    #     kwargs['teacher'] = self.request.user.profile
+    #     return kwargs
 
 
 class CourseUpdateView(UpdateView):
@@ -94,6 +99,15 @@ class LessonCreateView(CreateView):
     form_class = LessonForm
     template_name = 'form.html'
 
+    # def get_initial(self, *args, **kwargs):
+    #     initial = super(LessonCreateView, self).get_initial(**kwargs)
+    #     initial['course'] = self.kwargs['course_pk']
+    #     return initial
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(LessonCreateView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['course_pk'] = self.kwargs['course_pk']
+        return kwargs
+
 
 class LessonUpdateView(UpdateView):
     model = Lesson
@@ -111,3 +125,9 @@ class LessonDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('course_detail', kwargs={'pk': self.object.course.id})
+
+
+class AttachmentCreateView(CreateView):
+    form_class = AttachmentForm
+    template_name = 'form.html'
+

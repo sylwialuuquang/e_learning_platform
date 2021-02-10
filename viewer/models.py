@@ -18,7 +18,7 @@ class Team(Model):
 class Course(Model):
     name = CharField(max_length=128)
     teacher = ForeignKey(Profile, on_delete=DO_NOTHING)
-    team = ForeignKey(Team, on_delete=CASCADE)
+    team = ForeignKey(Team, on_delete=CASCADE, null=True)
     # slug = SlugField()
 
     def __str__(self):
