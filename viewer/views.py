@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
 from .models import Team, Course, Lesson, Post, Attachment, Schedule, TimeSlot
-from .forms import CourseForm, LessonForm, ScheduleForm, AttachmentForm
+from .forms import CourseForm, LessonForm, ScheduleForm
 from testsheets.models import Test
 from accounts.models import Profile
 
@@ -127,7 +127,7 @@ class LessonDeleteView(DeleteView):
         return reverse_lazy('course_detail', kwargs={'pk': self.object.course.id})
 
 
-class AttachmentCreateView(CreateView):
-    form_class = AttachmentForm
-    template_name = 'form.html'
+# class AttachmentCreateView(CreateView):
+#     form_class = AttachmentForm
+#     template_name = 'form.html'
 

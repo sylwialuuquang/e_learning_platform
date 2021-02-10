@@ -3,6 +3,12 @@
 {% block content %}
 <h1>{{ course }}</h1>
 <h4>Teacher: {{ course.teacher }}</h4>
+<form action="{% url 'course_update' course.id %}">
+    <input type="submit" value="Update Course">
+</form>
+<form action="{% url 'course_delete' course.id %}">
+    <input type="submit" value="Delete Course">
+</form>
 <div>
     Lessons:
     <ul>
@@ -39,13 +45,10 @@
         </li>
         {% endfor %}
     </ul>
+    <form action="{% url 'test_create'%}">
+        <input type="submit" value="Create Test">
+    </form>
 </div>
-    <form action="{% url 'course_update' course.id %}">
-        <input type="submit" value="Update Course">
-    </form>
-    <form action="{% url 'course_delete' course.id %}">
-        <input type="submit" value="Delete Course">
-    </form>
 <div>
     Scheduled:
     <ul>

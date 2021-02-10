@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{{ form.media }}
+<div class="page-header">
+    <h1>Create new test</h1>
+</div>
+
+  <form method="post" action="{% url 'test_create' %}">
+    {% csrf_token %}
+    <table>{{ test_form }}</table>
+    <table>{{ question_form }}</table>
+    <table>{{ answer_form }}</table>
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+{% endblock %}

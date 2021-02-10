@@ -1,7 +1,6 @@
 from django.forms import ModelForm
 from .models import Course, Lesson, Schedule, Attachment
 from accounts.models import Profile
-from django.contrib.auth.models import User
 
 
 class CourseForm(ModelForm):
@@ -34,7 +33,3 @@ class ScheduleForm(ModelForm):
         model = Schedule
         fields = '__all__'
 
-
-class AttachmentForm(ModelForm):
-    class Meta:
-        model = Attachment
