@@ -1,6 +1,12 @@
 from django.forms import ModelForm
-from .models import Course, Lesson, Schedule, Attachment
+from .models import Team, Course, Lesson, Schedule, Attachment
 from accounts.models import Profile
+
+
+class TeamForm(ModelForm):
+    class Meta:
+        model = Team
+        fields = '__all__'
 
 
 class CourseForm(ModelForm):

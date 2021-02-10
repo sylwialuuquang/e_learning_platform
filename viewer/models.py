@@ -1,9 +1,11 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from django.urls import reverse_lazy, reverse
 from django.db.models import Model, CharField, ForeignKey, SlugField, DO_NOTHING, CASCADE, TextField, DateTimeField, \
     FileField, IntegerField, TimeField
 from accounts.models import Profile
-from django.urls import reverse_lazy, reverse
 
 
 class Team(Model):
@@ -13,6 +15,14 @@ class Team(Model):
 
     def __str__(self):
         return self.symbol
+
+    def get_absolute_url(self):
+        return reverse_lazy('team_detail', args=[self.id])
+
+
+@receiver(post_save, sender=Team, dispatch_uid='create_advisory_course')
+def create_advisory(sender, instance, **kwargs):
+    Course.objects.create(name='Advisory', teacher=instance.supervisor, team=instance)
 
 
 class Course(Model):

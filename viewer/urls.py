@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import TeamDetailView, CourseDetailView, CourseCreateView, CourseUpdateView, CourseDeleteView, \
-    LessonDetailView, LessonCreateView, LessonUpdateView, LessonDeleteView, ScheduleCreateView
+from .views import TeamDetailView, TeamCreateView, CourseDetailView, CourseCreateView, CourseUpdateView, \
+    CourseDeleteView, LessonDetailView, LessonCreateView, LessonUpdateView, LessonDeleteView, ScheduleCreateView
 
 
 urlpatterns = [
     path('team/<int:pk>/', TeamDetailView.as_view(), name='team_detail'),
+    path('team/create', TeamCreateView.as_view(), name='team_create'),
     path('course/<int:pk>/', CourseDetailView.as_view(), name='course_detail'),
     path('course/create', CourseCreateView.as_view(), name='course_create'),
     path('course/<int:pk>/update', CourseUpdateView.as_view(), name='course_update'),

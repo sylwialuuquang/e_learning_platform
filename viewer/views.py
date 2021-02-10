@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views.generic import DetailView, ListView, CreateView, DeleteView, UpdateView
 
 from .models import Team, Course, Lesson, Post, Attachment, Schedule, TimeSlot
-from .forms import CourseForm, LessonForm, ScheduleForm
+from .forms import TeamForm, CourseForm, LessonForm, ScheduleForm
 from testsheets.models import Test
 from accounts.models import Profile
 
@@ -35,6 +35,11 @@ class TeamDetailView(DetailView):
                 schedule_table[row][col] = el.course
         context['schedule'] = schedule_table
         return context
+
+
+class TeamCreateView(CreateView):
+    form_class = TeamForm
+    template_name = 'form.html'
 
 
 class CourseDetailView(DetailView):
